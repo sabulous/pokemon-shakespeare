@@ -1,5 +1,5 @@
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import React, { useState } from "react";
 
 const SearchBar = ({
   updatePokemonName,
@@ -8,6 +8,8 @@ const SearchBar = ({
   updateShowPokeball,
 }) => {
   const [pokemonName, setPokemonName] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   const handleClick = async (e) => {
     updateShowDescription(false);
     updateShowPokeball(true);
@@ -20,9 +22,15 @@ const SearchBar = ({
     updatePokemonName(response.data.name);
     updateDescription(response.data.description);
   };
+
   const handleChange = (e) => {
     setPokemonName(e.target.value);
   };
+
+  useEffect(() => {
+    setIsButtonDisabled(pokemonName.length < 3);
+  }, [pokemonName]);
+
   return (
     <div className="search-bar-container">
       <input
@@ -31,7 +39,9 @@ const SearchBar = ({
         onChange={handleChange}
         value={pokemonName}
       ></input>
-      <button onClick={handleClick}>Search</button>
+      <button onClick={handleClick} disabled={isButtonDisabled}>
+        Search
+      </button>
     </div>
   );
 };
