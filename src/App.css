@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 20vmin;
+  height: 30vmin;
   pointer-events: none;
 }
 
@@ -38,4 +38,28 @@
   100% {
     transform: rotate(-10deg);
   }
+}
+
+.search-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 300px; */
+  margin: 5%;
+}
+
+@media only screen and (max-width: 300px) {
+  .search-bar-container {
+    flex-direction: column;
+  }
+}
+
+.search-bar-container * {
+  height: 30px;
+  margin: 5px;
+}
+
+.search-bar {
+  max-width: 100%;
+  /* width: 100%; */
 }
