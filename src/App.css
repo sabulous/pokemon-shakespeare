@@ -1,5 +1,9 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
+  margin: auto;
 }
 
 .App-logo {
@@ -14,14 +18,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: white;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 20vh;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -44,7 +48,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 300px; */
   margin: 5%;
 }
 
@@ -61,5 +64,32 @@
 
 .search-bar {
   max-width: 100%;
-  /* width: 100%; */
+}
+
+.pokeball-animation {
+  max-width: 80vw;
+}
+
+.pokemon-description-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  max-width: 80vw;
+  width: 500px;
+  height: 150px;
+  font-family: "Trebuchet MS";
+}
+
+.pokemon-description {
+  margin: 2px;
+}
+
+.pokemon-description label {
+  color: #0071b9;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  max-width: 80vw;
 }

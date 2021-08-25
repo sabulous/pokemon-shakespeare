@@ -1,34 +1,46 @@
+import React, { useState, useEffect } from "react";
 import logo from "./pokemon_logo.svg";
 import "./App.css";
 import SearchBar from "./components/SearchBar";
+import PokemonDescription from "./components/PokemonDescription";
+import Footer from "./components/Footer";
+import PokeballAnimation from "./components/PokeballAnimation";
 
 function App() {
+  const [pokemonName, setPokemonName] = useState("");
+  const [description, setDescription] = useState("");
+  const [showPokeball, setShowPokeball] = useState(false);
+  const [showDescription, setShowDescription] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (showPokeball) {
+      console.log("hey");
+      timer = setTimeout(() => {
+        console.log("in timeout");
+        setShowPokeball(false);
+        setShowDescription(true);
+      }, 2400);
+    }
+    return () => clearTimeout(timer);
+  }, [showPokeball]);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <SearchBar />
-        <p>
-          <span>Powered by </span>
-          <a
-            className="App-link"
-            href="https://pokeapi.co"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            PokéApi
-          </a>
-          <span> and </span>
-          <a
-            className="App-link"
-            href="https://funtranslations.com/api/shakespeare"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Fun Translations
-          </a>
-        </p>
       </header>
+      <SearchBar
+        updatePokemonName={setPokemonName}
+        updateDescription={setDescription}
+        updateShowDescription={setShowDescription}
+        updateShowPokeball={setShowPokeball}
+      />
+      {showPokeball && <PokeballAnimation />}
+      {showDescription && (
+        <PokemonDescription name={pokemonName} description={description} />
+      )}
+      <Footer />
     </div>
   );
 }

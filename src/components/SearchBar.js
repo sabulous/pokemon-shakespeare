@@ -1,10 +1,24 @@
+import axios from "axios";
 import React, { useState } from "react";
 
-const SearchBar = (props) => {
+const SearchBar = ({
+  updatePokemonName,
+  updateDescription,
+  updateShowDescription,
+  updateShowPokeball,
+}) => {
   const [pokemonName, setPokemonName] = useState("");
   const handleClick = async (e) => {
-    e.persist();
-    console.log("api called with", pokemonName);
+    updateShowDescription(false);
+    updateShowPokeball(true);
+    const response = await axios.get(
+      `${process.env.REACT_APP_POKEMON_API}/${pokemonName}`
+    );
+
+    console.log("response:", response);
+
+    updatePokemonName(response.data.name);
+    updateDescription(response.data.description);
   };
   const handleChange = (e) => {
     setPokemonName(e.target.value);
