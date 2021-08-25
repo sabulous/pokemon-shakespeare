@@ -1,3 +1,4 @@
+import React from "react";
 import capitalizeFirstLetter from "../helpers/capitalizeFirstLetter";
 
 const PokemonDescription = ({ name, description }) => {

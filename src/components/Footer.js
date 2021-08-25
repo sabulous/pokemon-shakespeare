@@ -1,10 +1,11 @@
-const Footer = (props) => {
+import React from "react";
+
+const Footer = () => {
   return (
     <p className="footer">
       <span>Powered by </span>
       <a
-        className="App-link"
-        href="https://pokeapi.co"
+        href="https://pokeapi.co/docs/v2"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -12,12 +13,15 @@ const Footer = (props) => {
       </a>
       <span> and </span>
       <a
-        className="App-link"
         href="https://funtranslations.com/api/shakespeare"
         target="_blank"
         rel="noopener noreferrer"
       >
         Fun Translations
+      </a>
+      <span> - </span>
+      <a href="mailto:sabsah@gmail.com" rel="noopener noreferrer">
+        Sabri Sahin © 2021
       </a>
     </p>
   );

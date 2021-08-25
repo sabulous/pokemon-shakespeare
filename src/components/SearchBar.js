@@ -1,31 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import SearchIcon from "./SearchIcon";
 
 const SearchBar = ({
-  updatePokemonName,
-  updateDescription,
-  updateShowDescription,
-  updateShowPokeball,
+  updatePokemonInfo,
+  updateShowInfo,
+  updateIsLoading,
+  updateErrorMessage,
+  isLoading,
 }) => {
   const [pokemonName, setPokemonName] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  const handleClick = async (e) => {
-    updateShowDescription(false);
-    updateShowPokeball(true);
-    const response = await axios.get(
-      `${process.env.REACT_APP_POKEMON_API}/${pokemonName}`
-    );
+  const handleClick = useCallback(async () => {
+    try {
+      updateShowInfo(false);
+      updateErrorMessage(null);
+      updateIsLoading(true);
 
-    console.log("response:", response);
+      const response = await axios.get(
+        `${process.env.REACT_APP_POKEMON_API}/${pokemonName}`
+      );
 
-    updatePokemonName(response.data.name);
-    updateDescription(response.data.description);
-  };
+      console.log("response:", response);
+
+      updatePokemonInfo({
+        name: response.data.name,
+        description: response.data.description,
+      });
+    } catch (e) {
+      updateErrorMessage(e.message);
+    }
+  }, [
+    pokemonName,
+    updateShowInfo,
+    updateErrorMessage,
+    updateIsLoading,
+    updatePokemonInfo,
+  ]);
 
   const handleChange = (e) => {
     setPokemonName(e.target.value);
   };
+
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      if (!isLoading && !isButtonDisabled && e.key === "Enter") {
+        handleClick();
+      }
+    };
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [handleClick, isLoading, isButtonDisabled]);
 
   useEffect(() => {
     setIsButtonDisabled(pokemonName.length < 3);
@@ -38,9 +66,16 @@ const SearchBar = ({
         className="search-bar"
         onChange={handleChange}
         value={pokemonName}
+        disabled={isLoading}
       ></input>
-      <button onClick={handleClick} disabled={isButtonDisabled}>
-        Search
+      <button
+        className="search-button"
+        onClick={handleClick}
+        disabled={isLoading || isButtonDisabled}
+      >
+        <SearchIcon
+          color={isLoading || isButtonDisabled ? "#808080" : "#0071b9"}
+        />
       </button>
     </div>
   );

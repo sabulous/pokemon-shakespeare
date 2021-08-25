@@ -1,3 +1,4 @@
+import React from "react";
 import pokeball from "../pokeball.gif";
 
 const PokeballAnimation = (props) => {
