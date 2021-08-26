@@ -10,6 +10,8 @@ Looking for a pokémon? This is the most wondrous lodging to becometh a pokémon
 
 * Clone this project from this link: [sabulous/pokemon-shakespeare](https://github.com/sabulous/pokemon-shakespeare)
 
+* Rename `env.dist` files as `.env` in both of the projects.
+
 * Make sure the project folders are at the same level (i.e. within the same parent folder).
 
 * In your favorite terminal console, browse to `pokemon-shakespeare` folder and run the following:
