@@ -12,7 +12,9 @@ Looking for a pokémon? This is the most wondrous lodging to becometh a pokémon
 
 * Make sure the project folders are at the same level (i.e. within the same parent folder).
 
-* In your favorite terminal console, browse to `pokemon-shakespeare` folder and run `docker-compose up --build`
+* In your favorite terminal console, browse to `pokemon-shakespeare` folder and run the following:
+
+  `docker-compose up --build`
 
 * After the build open your favorite browser and go to `http://localhost:3000`
 
