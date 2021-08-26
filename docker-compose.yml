@@ -20,5 +20,5 @@ services:
     env_file:
       - .env
     volumes:
-      - "./src:/home/node/app/src"
+      - "../pokemon-api/src:/home/node/app/src"
 
